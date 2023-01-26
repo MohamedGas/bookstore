@@ -1,2 +1,2 @@
 # bookstore
-#CSS 475 Project
+#CSS 475 Projects
