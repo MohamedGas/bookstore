@@ -18,8 +18,8 @@ management:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/gsim
-    username: postgres
-    password: Ugaas123@@
+    username: username
+    password: password
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
