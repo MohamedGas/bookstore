@@ -5,7 +5,7 @@ import model.ProductCatalog;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductCatalogDAO {
+public interface DAO {
 
     public List<ProductCatalog> getAll();
     public Optional<ProductCatalog> getById(String id);
