@@ -5,14 +5,15 @@ import model.ProductCatalog;
 import java.util.List;
 import java.util.Optional;
 
-public interface DAO {
+public interface DAO <T> {
 
-    public List<ProductCatalog> getAll();
-    public Optional<ProductCatalog> getById(String id);
-    public Optional<ProductCatalog> getByName(String name);
-    public Optional<List<ProductCatalog>> getBySpecialCriteria(String category);
-    public void add(ProductCatalog product);
-    public void update(ProductCatalog product, String id);
+    public List<T> getAll();
+    public Optional<T> getById(String id);
+    public Optional<T> getByName(String name);
+    public Optional<List<T>> getBySpecialCriteria(String category);
+    public void add(T product);
+    public void update(T product, String id);
     public void delete(String id);
+
 
 }
