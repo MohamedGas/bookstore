@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ProductCatalogImpl implements ProductCatalogDAO {
+public class ProductCatalogImpl implements DAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -81,6 +81,7 @@ public class ProductCatalogImpl implements ProductCatalogDAO {
                 productCatalog.productPrice(),
                 productCatalog.productImage());
     }
+
 
     @Override
     public void update(ProductCatalog product, String id) {
