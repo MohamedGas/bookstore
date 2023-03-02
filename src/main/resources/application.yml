@@ -17,7 +17,7 @@ management:
 
 spring:
   datasource:
-    url: jdbc:postgresql://gsimdev.cswevqalhiwi.us-east-1.rds.amazonaws.com:5432/gsim
+    url: jdbc:postgresql://gsim.cmiyvkan46ev.us-east-1.rds.amazonaws.com:5432/gsim
     username: postgres
     password: Dreamers123
     driver-class-name: org.postgresql.Driver
