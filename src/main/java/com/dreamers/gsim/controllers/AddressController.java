@@ -37,7 +37,7 @@ public class AddressController {
      * @param id
      * @return
      */
-    @GetMapping("/addresses/id/{id}")
+    @GetMapping("/addresses/{id}")
     public ResponseEntity<?> getAddressById(@PathVariable String id) {
         Optional<Address> addressById = addressDAOimpl.getById(id);
         return ResponseEntity.ok(addressById);
@@ -48,10 +48,13 @@ public class AddressController {
      * @param
      * @return
      */
-    @PostMapping(value = "/addresses/add")
-    public ResponseEntity<?> addAddress(@RequestBody Address address) {
-        addressDAOimpl.add(address);
-        return ResponseEntity.ok(address);
+    @PostMapping(value = "/addresses/add/{state_id}{street_address}{city}{postal_code}")
+    public ResponseEntity<?> addAddress(@RequestParam("state_id") String state_id,
+                                        @RequestParam("street_address") String street_address,
+                                        @RequestParam("city") String city,
+                                        @RequestParam("postal_code") String postal_code) {
+        addressDAOimpl.add(state_id,street_address,city,postal_code);
+        return ResponseEntity.ok(null);
     }
 
     /**
@@ -61,9 +64,13 @@ public class AddressController {
      */
 
     @PutMapping(value = "/addresses/update/{id}")
-    public ResponseEntity<?> updateAddress(@RequestBody Address address, @PathVariable String id) {
-        addressDAOimpl.update(address, id);
-        return ResponseEntity.ok(address);
+    public ResponseEntity<?> updateAddress(@PathVariable String id,
+                                           @RequestParam("state_id") String state_id,
+                                           @RequestParam("street_address") String street_address,
+                                           @RequestParam("city") String city,
+                                           @RequestParam("postal_code") String postal_code) {
+        addressDAOimpl.update(id,state_id,street_address,city,postal_code);
+        return ResponseEntity.ok(null);
     }
 
     /**

@@ -1,24 +1,30 @@
 package com.dreamers.gsim.DAO;
 
+import model.Address;
+import model.Inventory;
 import model.ProductCatalog;
 import model.SalesBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class SalesImpl implements SalesDAO{
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private ProductCatalogImpl productCatalogimpl;
+    private InventoryImpl inventoryImple;
 
-    public SalesImpl(JdbcTemplate jdbcTemplate, ProductCatalogImpl productCatalogimpl) {
+    public SalesImpl(JdbcTemplate jdbcTemplate, ProductCatalogImpl productCatalogimpl, InventoryImpl inventoryImpl) {
         this.jdbcTemplate = jdbcTemplate;
         this.productCatalogimpl = productCatalogimpl;
+        this.inventoryImple = inventoryImpl;
     }
 
     /**
@@ -45,5 +51,25 @@ public class SalesImpl implements SalesDAO{
         });
         return salesBooks;
         }
+
+    public void add(String sku, String quantity) {
+        Optional<Inventory> inventory = inventoryImple.getInventoryBySku(sku);
+//        int inventoryQuantity = inventory.get().quantity();
+//        if(Integer.valueOf(quantity)>inventoryQuantity){
+//            return;
+//        }
+        String sql = "INSERT INTO salesbook (sku, quantity,date_of_sale) VALUES (?, ?, CURRENT_TIMESTAMP)";
+        jdbcTemplate.update(sql,
+                sku,
+                Integer.valueOf(quantity));
+
+        String inventoryId = String.valueOf(inventory.get().id());
+        String sql2 = "INSERT INTO inventoryaudit (inventory_id, order_id, adjustment_type, reason, quantity_adjusted, date) " +
+                "VALUES (" + inventoryId + ", null, 2, \'sold\', " + quantity + ", CURRENT_TIMESTAMP)";
+        jdbcTemplate.update(sql2);
+
+        String sql3 = "UPDATE inventory SET quantity=quantity-" + quantity + "WHERE id=" + inventoryId;
+        jdbcTemplate.update(sql3);
+    }
     }
 
