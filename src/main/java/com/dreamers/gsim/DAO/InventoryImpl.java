@@ -95,9 +95,9 @@ public class InventoryImpl  implements  InventoryDAO{
 
             String sql = " UPDATE inventory " +
                     "SET quantity = CASE " +
-                    "WHEN adjustment_type = (SELECT id FROM adjustmenttype WHERE name = 'Restocked') " +
+                    "WHEN adjustment_type IN (SELECT id FROM adjustmenttype WHERE name IN ('Restocked', 'Refund')) " +
                     "THEN quantity + quantity_adjusted " +
-                    "WHEN adjustment_type IN (SELECT id FROM adjustmenttype WHERE name IN ('Damaged', 'Sold')) " +
+                    "WHEN adjustment_type IN (SELECT id FROM adjustmenttype WHERE name IN ('Damaged', 'Sold', 'Stale')) " +
                     "THEN quantity - quantity_adjusted " +
                     "END " +
                     "FROM inventoryaudit " +

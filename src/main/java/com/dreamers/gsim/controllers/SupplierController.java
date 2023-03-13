@@ -71,9 +71,13 @@ public class SupplierController {
      * @return
      */
     @PostMapping(value = "/suppliers/add")
-    public ResponseEntity<?> addSupplier(@RequestBody Supplier supplier) {
-        supplierDAOimpl.add(supplier);
-        return ResponseEntity.ok(supplier);
+    public ResponseEntity<?> addSupplier(@RequestParam("address_id") String address_id,
+                                         @RequestParam("name") String name,
+                                         @RequestParam("email") String email,
+                                         @RequestParam("manager") String manager,
+                                         @RequestParam("contact_number") String contact_number) {
+        supplierDAOimpl.add(address_id,name,email,manager,contact_number);
+        return ResponseEntity.ok(null);
     }
 
     /**
@@ -83,9 +87,14 @@ public class SupplierController {
      */
 
     @PutMapping(value = "/suppliers/update/{id}")
-    public ResponseEntity<?> updateSupplier(@RequestBody Supplier supplier, @PathVariable String id) {
-        supplierDAOimpl.update(supplier, id);
-        return ResponseEntity.ok(supplier);
+    public ResponseEntity<?> updateSupplier(@PathVariable String id,
+                                            @RequestParam("address_id") String address_id,
+                                            @RequestParam("name") String name,
+                                            @RequestParam("email") String email,
+                                            @RequestParam("manager") String manager,
+                                            @RequestParam("contact_number") String contact_number) {
+        supplierDAOimpl.update(id,address_id,name,email,manager,contact_number);
+        return ResponseEntity.ok(null);
     }
 
     /**

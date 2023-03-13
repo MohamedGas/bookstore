@@ -68,23 +68,31 @@ public class AddressImpl implements DAO<Address>{
     }
 
     @Override
-    public void add(Address address) {
-        String sql = "INSERT INTO address (state, street_address, city, postal_code) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql,
-                            address.state().id(),
-                            address.streetAddress(),
-                            address.city(),
-                            address.postalCode());
+    public void add(Address product) {
+
     }
 
     @Override
-    public void update(Address address, String id) {
+    public void update(Address product, String id) {
+
+    }
+
+    public void add(String state_id,String street_address, String city, String postal_code) {
+        String sql = "INSERT INTO address (state, street_address, city, postal_code) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql,
+                            state_id,
+                            street_address,
+                            city,
+                            postal_code);
+    }
+
+    public void update(String id,String state_id,String street_address, String city, String postal_code) {
         String sql = "UPDATE address SET state = ?, street_address = ?, city = ?, postal_code = ? WHERE id = ?";
         jdbcTemplate.update(sql,
-                            address.state().id(),
-                            address.streetAddress(),
-                            address.city(),
-                            address.postalCode(),
+                            state_id,
+                            street_address,
+                            city,
+                            postal_code,
                             Integer.valueOf(id));
     }
 

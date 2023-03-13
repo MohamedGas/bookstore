@@ -47,7 +47,7 @@ public class SupplierImpl implements DAO<Supplier>{
 
     @Override
     public Optional<Supplier> getById(String id) {
-        String sql = "SELECT *, supplier.id AS supplier_id, state.id AS state_id, supplier.name AS supplier_name, state.name AS state_name " +
+      String sql = "SELECT *, supplier.id AS supplier_id, state.id AS state_id, supplier.name AS supplier_name, state.name AS state_name " +
                 "FROM supplier " +
                 "INNER JOIN address ON supplier.address_id = address.id " +
                 "INNER JOIN state ON address.state = state.id " +
@@ -133,26 +133,34 @@ public class SupplierImpl implements DAO<Supplier>{
     }
 
     @Override
-    public void add(Supplier supplier) {
-        String sql = "INSERT INTO supplier (address_id, name, email, manager, contact_number) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql,
-                supplier.address().id(),
-                supplier.name(),
-                supplier.email(),
-                supplier.manager(),
-                supplier.contactNumber());
+    public void add(Supplier product) {
+
     }
 
     @Override
-    public void update(Supplier supplier, String id) {
+    public void update(Supplier product, String id) {
+
+    }
+
+    public void add(String address_id, String name, String email, String manager, String contact_number) {
+        String sql = "INSERT INTO supplier (address_id, name, email, manager, contact_number) VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql,
+                            Integer.valueOf(address_id),
+                            name,
+                            email,
+                            manager,
+                            Integer.valueOf(contact_number));
+    }
+
+    public void update(String id,String address_id, String name, String email, String manager, String contact_number) {
         String sql = "UPDATE supplier SET address_id = ?, name = ?, email = ?, manager = ?, contact_number = ? WHERE id = ?" ;
         jdbcTemplate.update(sql,
-                supplier.address().id(),
-                supplier.name(),
-                supplier.email(),
-                supplier.manager(),
-                supplier.contactNumber(),
-                Integer.valueOf(id));
+                            Integer.valueOf(address_id),
+                            name,
+                            email,
+                            manager,
+                            Integer.valueOf(contact_number),
+                            Integer.valueOf(id));
     }
 
     @Override

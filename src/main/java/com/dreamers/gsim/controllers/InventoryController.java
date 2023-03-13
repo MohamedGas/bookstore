@@ -40,21 +40,21 @@ public class InventoryController {
         return ResponseEntity.ok(inventory);
     }
 
-    /**
-     * Re-up the stock
-     */
-    @PutMapping("/re-up")
-    public void reUpTheStock() {
-        inventoryDAOimpl.reUpTheStock();
-    }
-    /**
-     * Re-up the stock individualy by sku id
-     */
-
-    @PutMapping("/re-up/{id}")
-    public void reUpTheStockIndvividualy(@PathVariable String sku) {
-        inventoryDAOimpl.reUpTheStockIndvividualy(sku);
-    }
+//    /**
+//     * Re-up the stock
+//     */
+//    @PutMapping("/re-up")
+//    public void reUpTheStock() {
+//        inventoryDAOimpl.reUpTheStock();
+//    }
+//    /**
+//     * Re-up the stock individualy by sku id
+//     */
+//
+//    @PutMapping("/re-up/{id}")
+//    public void reUpTheStockIndvividualy(@PathVariable String sku) {
+//        inventoryDAOimpl.reUpTheStockIndvividualy(sku);
+//    }
 
     /**
      * Get inventory running out
